@@ -38,3 +38,9 @@ $ docker pull braisam/pgbouncer:latest
 **DEFAULT_POOL_SIZE** = 80
 **SERVER_IDLE_TIMEOUT** = 10
 **AUTODB_IDLE_TRANSACTION** = 10
+
+####Troubleshooting
+
+```
+docker logs <your-pgbouncer-container-name>
+```
