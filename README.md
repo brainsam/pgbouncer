@@ -48,7 +48,7 @@ $ docker pull braisam/pgbouncer:latest
 **SERVER_IDLE_TIMEOUT** = 10
 **AUTODB_IDLE_TRANSACTION** = 10
 
-####Troubleshooting
+#### Troubleshooting
 
 ```
 docker logs <your-pgbouncer-container-name>
