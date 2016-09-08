@@ -56,33 +56,35 @@
 # DB_PORT=5432
 # DB_USER=postgres
 
-PG_LOG=/var/log/pgbouncer/
-PG_CONFIG_DIR=/etc/pgbouncer/
+PG_LOG=/var/log/pgbouncer
+PG_CONFIG_DIR=/etc/pgbouncer
 PG_USER=postgres
 
-echo "create pgbouncer config in ${PG_CONFIG_DIR}"
-mkdir -p ${PG_CONFIG_DIR}
+if [ ! -f ${PG_CONFIG_DIR}/pgbouncer.ini ]; then
+  echo "create pgbouncer config in ${PG_CONFIG_DIR}"
+  mkdir -p ${PG_CONFIG_DIR}
 
-echo "[databases]
-* = host=${DB_HOST:?"Setup pgbouncer config error! \
-      You must set DB_HOST env"} \
-port=${DB_PORT:-5432} \
-user=${DB_USER:-postgres} \
-${DB_PASSWORD:+password=${DB_PASSWORD}}
+  echo "[databases]
+  * = host=${DB_HOST:?"Setup pgbouncer config error! \
+        You must set DB_HOST env"} \
+  port=${DB_PORT:-5432} \
+  user=${DB_USER:-postgres} \
+  ${DB_PASSWORD:+password=${DB_PASSWORD}}
 
-[pgbouncer]
-listen_port = ${PGBOUNCER_PORT:-6432}
-listen_addr = ${PGBOUNCER_LISTEN_ADDR:-0.0.0.0}
-auth_type   = ${AUTH_TYPE:-any}
-ignore_startup_parameters = extra_float_digits
+  [pgbouncer]
+  listen_port = ${PGBOUNCER_PORT:-6432}
+  listen_addr = ${PGBOUNCER_LISTEN_ADDR:-0.0.0.0}
+  auth_type   = ${AUTH_TYPE:-any}
+  ignore_startup_parameters = extra_float_digits
 
-pool_mode = ${POOL_MODE:-session}
-max_client_conn = ${MAX_CLIENT_CONN:-10000}
-default_pool_size = ${DEFAULT_POOL_SIZE:-80}
-server_idle_timeout = ${SERVER_IDLE_TIMEOUT:-10}
-autodb_idle_timeout = ${AUTODB_IDLE_TRANSACTION:-10}\
-" > ${PG_CONFIG_DIR}/pgbouncer.ini
-
+  pool_mode = ${POOL_MODE:-session}
+  max_client_conn = ${MAX_CLIENT_CONN:-10000}
+  default_pool_size = ${DEFAULT_POOL_SIZE:-80}
+  server_idle_timeout = ${SERVER_IDLE_TIMEOUT:-10}
+  autodb_idle_timeout = ${AUTODB_IDLE_TRANSACTION:-10}
+  admin_users=postgres\
+  " > ${PG_CONFIG_DIR}/pgbouncer.ini
+fi
 
 adduser ${PG_USER}
 mkdir -p ${PG_LOG}
