@@ -5,14 +5,23 @@
 At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
 
 ## Code Example
+You can configure it by Environment variables:
 ```bash
 $ docker run -d \
  --name=pgbouncer \
  -e DB_HOST=postgresql.example.com \
  -e DB_USER=postgres \
  -e DB_PASSWORD=mypassword \
- -e DB
+ -e POOL_MODE=session \
+ -e MAX_CLIENT_CONN=10000 \
  brainsam/pgbouncer:latest
+```
+Or You can mount config file into docker container:
+```bash
+$ docker run -d \
+ --name pgbouncer \
+ -v pgbouncer-config-file:/etc/pgbouncer/pgbouncer.ini \
+ brainsam/bgbouncer:latest
 ```
 
 ## Motivation
