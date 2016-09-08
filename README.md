@@ -1,8 +1,6 @@
 ## Synopsis
 
-*pgbouncer* is a popular, small connection pooler for Postgresql. This is yet another docker image with pgbouncer, based on alpine.
-
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+**pgbouncer** is a popular, small connection pooler for Postgresql. This is yet another docker image with pgbouncer, based on alpine.
 
 ## Code Example
 You can configure it by Environment variables:
@@ -10,10 +8,8 @@ You can configure it by Environment variables:
 $ docker run -d \
  --name=pgbouncer \
  -e DB_HOST=postgresql.example.com \
- -e DB_USER=postgres \
+ -e DB_USER=admin \
  -e DB_PASSWORD=mypassword \
- -e POOL_MODE=session \
- -e MAX_CLIENT_CONN=10000 \
  brainsam/pgbouncer:latest
 ```
 Or You can mount config file into docker container:
@@ -24,29 +20,14 @@ $ docker run -d \
  brainsam/bgbouncer:latest
 ```
 
-## Motivation
-
-This image is stateless, and configurable by environment variables. The list of parameters not contains all allowed by maintainer, only most usual, IMHO.
-
 ## Installation
 
 ```bash
 $ docker pull braisam/pgbouncer:latest
 ```
-## Environment variables
+## Configuration
 
-**DB_HOST** = {not set, required}
-**DB_PORT** = 6432
-**DB_USER** = postgres
-**DB_PASSWORD** = {not set, mandatory}
-**PGBOUNCER_PORT** = 6432
-**PGBOUNCER_LISTEN_ADDR** = 0.0.0.0
-**AUTH_TYPE** = any
-**POOL_MODE** = session
-**MAX_CLIENT_CONN** = 10000
-**DEFAULT_POOL_SIZE** = 80
-**SERVER_IDLE_TIMEOUT** = 10
-**AUTODB_IDLE_TRANSACTION** = 10
+All configuration parameters of pgbouncer are available both by *--env* (use the same keys in upper case) and by mounting pgbouncer.ini into container.
 
 #### Troubleshooting
 
