@@ -107,7 +107,7 @@ ${TCP_DEFER_ACCEPT:+tcp_defer_accept = ${TCP_DEFER_ACCEPT}\n}\
 ${TCP_KEEPALIVE:+tcp_keepalive = ${TCP_KEEPALIVE}\n}\
 ${TCP_KEEPCNT:+tcp_keepcnt = ${TCP_KEEPCNT}\n}\
 ${TCP_KEEPIDLE:+tcp_keepidle = ${TCP_KEEPIDLE}\n}\
-${TCP_KEEPINTVL:+tcp_keepintvl = ${TCP_KEEPINTVL}}\
+${TCP_KEEPINTVL:+tcp_keepintvl = ${TCP_KEEPINTVL}\n}\
 ################## end file ##################
 " > ${PG_CONFIG_DIR}/pgbouncer.ini
 fi
