@@ -23,7 +23,7 @@ $ docker run -d \
 ## Installation
 
 ```bash
-$ docker pull braisam/pgbouncer:latest
+$ docker pull brainsam/pgbouncer:latest
 ```
 ## Configuration
 
