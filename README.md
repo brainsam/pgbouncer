@@ -17,7 +17,7 @@ Or You can mount config file into docker container:
 $ docker run -d \
  --name pgbouncer \
  -v pgbouncer-config-file:/etc/pgbouncer/pgbouncer.ini \
- brainsam/bgbouncer:latest
+ brainsam/pgbouncer:latest
 ```
 
 ## Installation
