@@ -1,7 +1,5 @@
 FROM alpine:latest
 
-MAINTAINER brainsam@yandex.ru
-
 RUN apk --update add git build-base automake libtool m4 autoconf libevent-dev openssl-dev c-ares-dev  && \
 	git clone https://github.com/pgbouncer/pgbouncer.git && \
 	cd pgbouncer         && \
