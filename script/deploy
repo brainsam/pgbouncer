@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -aeu
+
+readonly git_commit=$(git rev-parse --short @)
+readonly image_name='eu.gcr.io/bnl-blendle/pgbouncer'
+readonly image="$image_name:$git_commit"
+
+docker build -t "$image" .
+gcloud docker -- push "$image"
+gcloud docker -- push "$image_name:latest"
