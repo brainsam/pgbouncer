@@ -17,8 +17,7 @@ if [ ! -f ${PG_CONFIG_DIR}/pgbouncer.ini ]; then
 # Lines starting with “;” or “#” are taken as comments and ignored.
 # The characters “;” and “#” are not recognized when they appear later in the line.
 [databases]
-* = host=${DB_HOST:?"Setup pgbouncer config error! \
-      You must set DB_HOST env"} \
+* = host=${DB_HOST:?"Setup pgbouncer config error! You must set DB_HOST env"} \
 port=${DB_PORT:-5432} user=${DB_USER:-postgres} \
 ${DB_PASSWORD:+password=${DB_PASSWORD}}
 
@@ -121,4 +120,4 @@ if [ -z $QUIET ]; then
   cat ${PG_CONFIG_DIR}/pgbouncer.ini
 fi
 echo "Starting pgbouncer..."
-exec pgbouncer ${QUIET:+-q} -u ${PG_USER} ${PG_CONFIG_DIR}/pgbouncer.ini
+exec /pgbouncer/bin/pgbouncer ${QUIET:+-q} -u ${PG_USER} ${PG_CONFIG_DIR}/pgbouncer.ini
