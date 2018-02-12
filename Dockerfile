@@ -5,7 +5,7 @@ MAINTAINER brainsam@yandex.ru
 WORKDIR /
 RUN apk --update add git python py-pip build-base automake libtool m4 autoconf libevent-dev openssl-dev c-ares-dev
 RUN pip install docutils
-RUN git clone --depth=1 --branch pgbouncer_1_7_2 https://github.com/pgbouncer/pgbouncer.git src
+RUN git clone --depth=1 --branch pgbouncer_1_8_1 https://github.com/pgbouncer/pgbouncer.git src
 
 WORKDIR /bin
 RUN ln -s ../usr/bin/rst2man.py rst2man
