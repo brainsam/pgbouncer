@@ -3,7 +3,7 @@ FROM alpine:latest AS build_stage
 MAINTAINER brainsam@yandex.ru
 
 WORKDIR /
-RUN apk --update add git python py-pip build-base automake libtool m4 autoconf libevent-dev openssl-dev c-ares-dev
+RUN apk --update add git python py-pip build-base automake libtool m4 autoconf libevent-dev libressl-dev c-ares-dev
 RUN pip install docutils
 RUN git clone https://github.com/pgbouncer/pgbouncer.git src
 
@@ -21,7 +21,7 @@ RUN make install
 RUN ls -R /pgbouncer
 
 FROM alpine:latest
-RUN apk --update add libevent openssl c-ares
+RUN apk --update add libevent libressl c-ares
 WORKDIR /
 COPY --from=build_stage /pgbouncer /pgbouncer
 ADD entrypoint.sh ./
