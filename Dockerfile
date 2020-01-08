@@ -1,26 +1,19 @@
-FROM alpine:latest AS build_stage
-
-MAINTAINER brainsam@yandex.ru
+FROM alpine:3.11.2 AS build_stage
 
 WORKDIR /
-RUN apk --update add git python py-pip build-base automake libtool m4 autoconf libevent-dev openssl-dev c-ares-dev
-RUN pip install docutils
-RUN git clone --branch pgbouncer_1_9_0 --depth 1 https://github.com/pgbouncer/pgbouncer.git src
+RUN apk --update add python py-pip build-base automake libtool m4 autoconf libevent-dev openssl-dev c-ares-dev
+RUN pip install docutils \
+  && wget https://github.com/pgbouncer/pgbouncer/releases/download/pgbouncer_1_12_0/pgbouncer-1.12.0.tar.gz \
+  && tar zxf pgbouncer-1.12.0.tar.gz && rm pgbouncer-1.12.0.tar.gz \
+  && cd /pgbouncer-1.12.0/ \
+  && ./configure --prefix=/pgbouncer \
+  && make \
+  && make install
 
 WORKDIR /bin
 RUN ln -s ../usr/bin/rst2man.py rst2man
 
-WORKDIR /src
-RUN mkdir /pgbouncer
-RUN git submodule init
-RUN git submodule update
-RUN ./autogen.sh
-RUN	./configure --prefix=/pgbouncer --with-libevent=/usr/lib
-RUN make
-RUN make install
-RUN ls -R /pgbouncer
-
-FROM alpine:latest
+FROM alpine:3.11.2
 RUN apk --update add libevent openssl c-ares
 WORKDIR /
 COPY --from=build_stage /pgbouncer /pgbouncer
