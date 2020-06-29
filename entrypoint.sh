@@ -117,7 +117,7 @@ chmod -R 755 ${PG_LOG}
 chown -R ${PG_USER}:${PG_USER} ${PG_LOG}
 
 if [ -z $QUIET ]; then
-  cat ${PG_CONFIG_DIR}/pgbouncer.ini
+  cat ${PG_CONFIG_DIR}/pgbouncer.ini | sed "s/${DB_PASSWORD}/*****/g"
 fi
 echo "Starting pgbouncer..."
 exec /pgbouncer/bin/pgbouncer ${QUIET:+-q} -u ${PG_USER} ${PG_CONFIG_DIR}/pgbouncer.ini
