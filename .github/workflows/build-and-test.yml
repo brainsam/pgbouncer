@@ -12,7 +12,3 @@ jobs:
       - name: Build
         shell: bash
         run: docker build .
-
-      - name: login
-        shell: bash
-        run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
